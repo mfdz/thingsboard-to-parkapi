@@ -1,0 +1,53 @@
+#! /usr/bin/env python3
+
+import requests
+import os
+import operator
+
+base_url = "https://portal.mhascaro.com/api"
+
+token_url = f"{base_url}/auth/login"
+
+payload = {
+    "username": os.environ['THINGSBOARD_USERNAME'],
+    "password": os.environ['THINGSBOARD_PASSWORD']
+}
+
+response = requests.post(token_url, json=payload)
+token = response.json()["token"]
+
+auth_headers = {
+    "X-Authorization": f"Bearer {token}"
+}
+
+list_url = f"{base_url}/entityGroup/3c521c80-53bd-11ea-aa10-3316385c1cc2/entities?limit=100"
+
+response = requests.get(list_url, headers=auth_headers)
+
+parking_lots = response.json()["data"]
+
+def get_value(items, name):
+    for i in items:
+        if(i["key"] == name):
+            return i["value"]
+
+def fetch_lot_data(lot):
+    id = lot["id"]["id"]
+
+    attribute_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/attributes?keys=address,latitude,longitude"
+    attrs = requests.get(attribute_url, headers=auth_headers).json()
+    lot["attrs"] = attrs
+
+    timeseries_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/timeseries?keys=latestSumParkingState,SumOccupied,TotalParking_mapping"
+    timeseries = requests.get(timeseries_url, headers=auth_headers).json()
+    lot["timeseries"] = timeseries
+
+    return {
+        "id": id,
+        "address": get_value(attrs, "address"),
+        "latitude": get_value(attrs, "latitude"),
+        "longitude": get_value(attrs, "longitude"),
+    }
+
+updated_lots = list(map(fetch_lot_data, parking_lots))
+print(updated_lots)
