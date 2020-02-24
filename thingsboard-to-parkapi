@@ -5,7 +5,11 @@ import os
 import operator
 import datetime
 import json
+from argparse import ArgumentParser
 
+parser = ArgumentParser()
+parser.add_argument("output", help="write output to FILE")
+args = parser.parse_args()
 
 base_url = "https://portal.mhascaro.com/api"
 
@@ -80,6 +84,7 @@ parken_api_response = {
     "lots": updated_lots
 }
 
-json_output = json.dumps(parken_api_response)
+with open(args.output, 'w', encoding='utf-8') as f:
+    json.dump(parken_api_response, f, ensure_ascii=False, indent=2)
 
-print(json_output)
+print(f"Wrote output to {args.output}")
