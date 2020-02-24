@@ -3,6 +3,9 @@
 import requests
 import os
 import operator
+import datetime
+import json
+
 
 base_url = "https://portal.mhascaro.com/api"
 
@@ -46,15 +49,37 @@ def fetch_lot_data(lot):
 
     timeseries_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/timeseries?keys=latestSumParkingState,SumOccupied,TotalParking_mapping"
     timeseries = requests.get(timeseries_url, headers=auth_headers).json()
+    total = get_timeseries_value(timeseries, "TotalParking_mapping")
+    occupied = get_timeseries_value(timeseries, "latestSumParkingState")
+    free = total - occupied
 
     return {
         "id":               id,
+        "lot_type":         "Parkhaus",
         "address":          get_attribute(attrs, "address"),
-        "latitude":         get_attribute(attrs, "latitude"),
-        "longitude":        get_attribute(attrs, "longitude"),
-        "total_spaces":     get_timeseries_value(timeseries, "TotalParking_mapping"),
-        "occupied_spaces":  get_timeseries_value(timeseries, "latestSumParkingState")
+        "name":             get_attribute(attrs, "address"),
+        "forecast":         False,
+        "state":            "open",
+        "coords" : {
+            "lat":          get_attribute(attrs, "latitude"),
+            "lng":          get_attribute(attrs, "longitude"),
+        },
+        "total":            total,
+        "free":             free,
     }
 
 updated_lots = list(map(fetch_lot_data, parking_lots))
-print(updated_lots)
+
+print(f"Fetched information for {len(updated_lots)} parking lots")
+
+utc_now = datetime.datetime.utcnow().isoformat()
+
+parken_api_response = {
+    "last_downloaded": utc_now,
+    "last_updated": utc_now,
+    "lots": updated_lots
+}
+
+json_output = json.dumps(parken_api_response)
+
+print(json_output)
