@@ -26,27 +26,34 @@ response = requests.get(list_url, headers=auth_headers)
 
 parking_lots = response.json()["data"]
 
-def get_value(items, name):
+def get_attribute(items, name):
     for i in items:
         if(i["key"] == name):
             return i["value"]
+
+def get_timeseries_value(timeseries, name):
+    val = timeseries[name][0]["value"]
+    if val == None:
+        return 0
+    else:
+        return int(float(val))
 
 def fetch_lot_data(lot):
     id = lot["id"]["id"]
 
     attribute_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/attributes?keys=address,latitude,longitude"
     attrs = requests.get(attribute_url, headers=auth_headers).json()
-    lot["attrs"] = attrs
 
     timeseries_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/timeseries?keys=latestSumParkingState,SumOccupied,TotalParking_mapping"
     timeseries = requests.get(timeseries_url, headers=auth_headers).json()
-    lot["timeseries"] = timeseries
 
     return {
-        "id": id,
-        "address": get_value(attrs, "address"),
-        "latitude": get_value(attrs, "latitude"),
-        "longitude": get_value(attrs, "longitude"),
+        "id":               id,
+        "address":          get_attribute(attrs, "address"),
+        "latitude":         get_attribute(attrs, "latitude"),
+        "longitude":        get_attribute(attrs, "longitude"),
+        "total_spaces":     get_timeseries_value(timeseries, "TotalParking_mapping"),
+        "occupied_spaces":  get_timeseries_value(timeseries, "latestSumParkingState")
     }
 
 updated_lots = list(map(fetch_lot_data, parking_lots))
