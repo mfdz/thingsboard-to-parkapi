@@ -63,7 +63,7 @@
                 "name": "Bahnhofstra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 47,
-                "type": "Park+Ride"
+                "type": "Park-Ride"
             }
         },
         {
@@ -175,7 +175,7 @@
                 "name": "P+R Kalkofenstra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 398,
-                "type": "Park+Ride"
+                "type": "Park-Ride"
             }
         },
         {
