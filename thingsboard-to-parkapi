@@ -7,6 +7,21 @@ import datetime
 import json
 from argparse import ArgumentParser
 
+# this is a terrible hack and is necessary because of a misconfigured AAAA record
+# see https://github.com/mfdz/digitransit-ansible/issues/11
+# remove as soon as this ticket has been closed
+import socket
+import requests.packages.urllib3.util.connection as urllib3_cn
+
+def allowed_gai_family():
+    """
+    https://github.com/shazow/urllib3/blob/master/urllib3/util/connection.py
+    """
+    family = socket.AF_INET # force IPv4
+    return family
+
+urllib3_cn.allowed_gai_family = allowed_gai_family
+
 parser = ArgumentParser()
 parser.add_argument("-o", "--output", help="write output to FILE")
 parser.add_argument("-g", "--geojson", help="the static geojson input file")
@@ -46,7 +61,7 @@ def get_timeseries_value(timeseries, name):
     else:
         return int(float(val))
 
-def fetch_live_lot_data(lot):
+def fetch_dynamic_lots(lot):
     id = lot["id"]["id"]
 
     attribute_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/attributes?keys=address,latitude,longitude"
@@ -73,12 +88,7 @@ def fetch_live_lot_data(lot):
         "free":             free,
     }
 
-def fetch_static_lot_data():
-    names_to_remove = [
-        "Stadthalle",
-        "Auf dem Graben"
-    ]
-    res = []
+def fetch_dynamic_lots():
     with open(args.geojson, 'r', encoding='utf-8') as f:
         geojson = json.load(f)
 
@@ -98,16 +108,15 @@ def fetch_static_lot_data():
                 },
                 "total":            props["capacity"]
             }
-            if(props["name"] not in names_to_remove):
-                res.append(l)
+            res.append(l)
 
 
     return res
 
-updated_lots = list(map(fetch_live_lot_data, parking_lots))
-static_lots = fetch_static_lot_data()
+dynamic_lots = list(map(fetch_dynamic_lots, parking_lots))
+static_lots = fetch_dynamic_lots()
 
-print(f"Fetched occupancy information for {len(updated_lots)} parking lots")
+print(f"Fetched occupancy information for {len(dynamic_lots)} parking lots")
 print(f"Fetched {len(static_lots)} static parking lots")
 
 utc_now = datetime.datetime.utcnow().isoformat()
@@ -115,7 +124,7 @@ utc_now = datetime.datetime.utcnow().isoformat()
 parken_api_response = {
     "last_downloaded": utc_now,
     "last_updated": utc_now,
-    "lots": updated_lots + static_lots
+    "lots": dynamic_lots + static_lots
 }
 
 with open(args.output, 'w', encoding='utf-8') as f:
