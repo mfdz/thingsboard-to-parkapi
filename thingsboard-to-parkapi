@@ -74,6 +74,10 @@ def fetch_live_lot_data(lot):
     }
 
 def fetch_static_lot_data():
+    names_to_remove = [
+        "Stadthalle",
+        "Auf dem Graben"
+    ]
     res = []
     with open(args.geojson, 'r', encoding='utf-8') as f:
         geojson = json.load(f)
@@ -94,7 +98,8 @@ def fetch_static_lot_data():
                 },
                 "total":            props["capacity"]
             }
-            res.append(l)
+            if(props["name"] not in names_to_remove):
+                res.append(l)
 
 
     return res
