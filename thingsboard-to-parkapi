@@ -8,7 +8,8 @@ import json
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
-parser.add_argument("output", help="write output to FILE")
+parser.add_argument("-o", "--output", help="write output to FILE")
+parser.add_argument("-g", "--geojson", help="the static geojson input file")
 args = parser.parse_args()
 
 base_url = "https://portal.mhascaro.com/api"
@@ -45,7 +46,7 @@ def get_timeseries_value(timeseries, name):
     else:
         return int(float(val))
 
-def fetch_lot_data(lot):
+def fetch_live_lot_data(lot):
     id = lot["id"]["id"]
 
     attribute_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/attributes?keys=address,latitude,longitude"
@@ -59,7 +60,7 @@ def fetch_lot_data(lot):
 
     return {
         "id":               id,
-        "lot_type":         "Parkhaus",
+        "lot_type":         "Parkplatz",
         "address":          get_attribute(attrs, "address"),
         "name":             get_attribute(attrs, "address"),
         "forecast":         False,
@@ -72,16 +73,44 @@ def fetch_lot_data(lot):
         "free":             free,
     }
 
-updated_lots = list(map(fetch_lot_data, parking_lots))
+def fetch_static_lot_data():
+    res = []
+    with open(args.geojson, 'r', encoding='utf-8') as f:
+        geojson = json.load(f)
 
-print(f"Fetched information for {len(updated_lots)} parking lots")
+        for lot in geojson["features"]:
+            props = lot["properties"]
+            coords = lot["geometry"]["coordinates"]
+            l = {
+                "id":               props["name"],
+                "lot_type":         "Parkplatz",
+                "address":          props["name"],
+                "name":             props["name"],
+                "forecast":         False,
+                "state":            "open",
+                "coords" : {
+                    "lat":          float(coords[1]),
+                    "lng":          float(coords[0])
+                },
+                "total":            props["capacity"]
+            }
+            res.append(l)
+
+
+    return res
+
+updated_lots = list(map(fetch_live_lot_data, parking_lots))
+static_lots = fetch_static_lot_data()
+
+print(f"Fetched occupancy information for {len(updated_lots)} parking lots")
+print(f"Fetched {len(static_lots)} static parking lots")
 
 utc_now = datetime.datetime.utcnow().isoformat()
 
 parken_api_response = {
     "last_downloaded": utc_now,
     "last_updated": utc_now,
-    "lots": updated_lots
+    "lots": updated_lots + static_lots
 }
 
 with open(args.output, 'w', encoding='utf-8') as f:
