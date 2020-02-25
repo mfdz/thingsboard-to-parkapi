@@ -98,7 +98,7 @@ def fetch_static_lots():
             coords = lot["geometry"]["coordinates"]
             l = {
                 "id":               props.get("id"),
-                "lot_type":         "Parkplatz",
+                "lot_type":         props["type"],
                 "address":          props["name"],
                 "name":             props["name"],
                 "forecast":         False,
