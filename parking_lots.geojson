@@ -43,6 +43,7 @@
                 ]
             },
             "properties": {
+                "id" : "5c4224c0-0a0e-11ea-9bc9-896973774264",
                 "name": "Auf dem Graben",
                 "address": "71083 Herrenberg",
                 "capacity": 63,
@@ -255,6 +256,23 @@
                 "address": "71083 Herrenberg",
                 "capacity": 95,
                 "type": "Parkplatz"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  8.87751,
+                  48.59019
+                ]
+            },
+            "properties": {
+                "id": "c455d080-fcb1-11e9-9a2d-876c1a6b66b2",
+                "name": "Wohnmobilhafen Herrenberg",
+                "address": "71083 Herrenberg",
+                "capacity": 10,
+                "type": "Wohnmobilparkplatz"
             }
         }
     ]

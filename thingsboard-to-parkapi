@@ -61,7 +61,7 @@ def get_timeseries_value(timeseries, name):
     else:
         return int(float(val))
 
-def fetch_dynamic_lots(lot):
+def fetch_dynamic_lot(lot):
     id = lot["id"]["id"]
 
     attribute_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/attributes?keys=address,latitude,longitude"
@@ -88,7 +88,8 @@ def fetch_dynamic_lots(lot):
         "free":             free,
     }
 
-def fetch_dynamic_lots():
+def fetch_static_lots():
+    res = []
     with open(args.geojson, 'r', encoding='utf-8') as f:
         geojson = json.load(f)
 
@@ -96,12 +97,12 @@ def fetch_dynamic_lots():
             props = lot["properties"]
             coords = lot["geometry"]["coordinates"]
             l = {
-                "id":               props["name"],
+                "id":               props.get("id"),
                 "lot_type":         "Parkplatz",
                 "address":          props["name"],
                 "name":             props["name"],
                 "forecast":         False,
-                "state":            "open",
+                "state":            "nodata",
                 "coords" : {
                     "lat":          float(coords[1]),
                     "lng":          float(coords[0])
@@ -110,21 +111,29 @@ def fetch_dynamic_lots():
             }
             res.append(l)
 
-
     return res
 
-dynamic_lots = list(map(fetch_dynamic_lots, parking_lots))
-static_lots = fetch_dynamic_lots()
+dynamic_lots = list(map(fetch_dynamic_lot, parking_lots))
+static_lots = fetch_static_lots()
 
 print(f"Fetched occupancy information for {len(dynamic_lots)} parking lots")
 print(f"Fetched {len(static_lots)} static parking lots")
+
+def merge_data(dynamic, static):
+    for lot in static:
+        id = lot.get("id")
+        if(id != None):
+            dynamic_lot = [x for x in dynamic if x["id"] == id][0]
+            lot["free"] = dynamic_lot["free"]
+
+    return static
 
 utc_now = datetime.datetime.utcnow().isoformat()
 
 parken_api_response = {
     "last_downloaded": utc_now,
     "last_updated": utc_now,
-    "lots": dynamic_lots + static_lots
+    "lots": merge_data(dynamic_lots, static_lots)
 }
 
 with open(args.output, 'w', encoding='utf-8') as f:
