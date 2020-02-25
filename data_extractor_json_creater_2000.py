@@ -36,14 +36,14 @@ for a in parsedLinks:
       "geometry": {
           "type": "Point",
           "coordinates": [
-              str(dataDiv.find("a", {"target": "googleMaps"})['href']).split("=")[1].split("%2C")[0],
-              str(dataDiv.find("a", {"target": "googleMaps"})['href']).split("=")[1].split("%2C")[1]
+              str(dataDiv.find("a", {"target": "googleMaps"})['href']).split("=")[1].split("%2C")[1],
+              str(dataDiv.find("a", {"target": "googleMaps"})['href']).split("=")[1].split("%2C")[0]
           ]
       },
       "properties": {
           "name": dataDiv.h2.text.split(",")[0],
           "address": str(dataDiv.find("div", {"class": "cCore_addressBlock_address"})).split("<br/>")[1],
-          "capacity": dataDiv.h2.text.split(", ")[1].split(" ")[0],
+          "capacity": int(dataDiv.h2.text.split(", ")[1].split(" ")[0]),
       }
     }
     i = i + 1
@@ -58,14 +58,14 @@ dictlist[15] = {
   "geometry": {
       "type": "Point",
       "coordinates": [
-          48.59946,
-          8.86822
+          "8.86822",
+          "48.59946"
       ]
   },
   "properties": {
       "name": dataDiv.h2.text.split(",")[0],
       "address": str(dataDiv.find("div", {"class": "cCore_addressBlock_address"})).split("<br/>")[1],
-      "capacity": dataDiv.h2.text.split(" ")[1],
+      "capacity": int(dataDiv.h2.text.split(" ")[1]),
   }
 }
 
@@ -78,7 +78,7 @@ park = {
 
 
 # %%
-with open('park.json', 'w') as fp:
+with open('parking_lots.geojson', 'w') as fp:
     json.dump(park, fp)
 
 
