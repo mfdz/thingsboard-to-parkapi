@@ -131,6 +131,7 @@ def merge_data(dynamic, static):
 utc_now = datetime.datetime.utcnow().isoformat()
 
 parken_api_response = {
+    "data_source": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze",
     "last_downloaded": utc_now,
     "last_updated": utc_now,
     "lots": merge_data(dynamic_lots, static_lots)
