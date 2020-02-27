@@ -3,7 +3,6 @@
 
 # %%
 from bs4 import BeautifulSoup
-import subprocess
 import json
 import requests
 
