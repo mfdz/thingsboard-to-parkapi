@@ -88,6 +88,22 @@ def fetch_dynamic_lot(lot):
         "free":             free,
     }
 
+def clean_nones(value):
+    """
+    Recursively remove all None values from dictionaries and lists, and returns
+    the result as a new dictionary or list.
+    """
+    if isinstance(value, list):
+        return [clean_nones(x) for x in value if x is not None]
+    elif isinstance(value, dict):
+        return {
+            key: clean_nones(val)
+            for key, val in value.items()
+            if val is not None
+        }
+    else:
+        return value
+
 def fetch_static_lots():
     res = []
     with open(args.geojson, 'r', encoding='utf-8') as f:
@@ -111,7 +127,7 @@ def fetch_static_lots():
                 "url":              props.get("url"),
                 "opening_hours":    props.get("openingHours")
             }
-            res.append(l)
+            res.append(clean_nones(l))
 
     return res
 
