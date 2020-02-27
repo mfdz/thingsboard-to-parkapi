@@ -30,7 +30,8 @@
                 "name": "Altstadtgarage",
                 "address": "71083 Herrenberg",
                 "capacity": 97,
-                "type": "Parkhaus"
+                "type": "Parkhaus",
+                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/altstadtgarage/"
             }
         },
         {
@@ -63,7 +64,8 @@
                 "name": "Bahnhofstra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 47,
-                "type": "Park-Ride"
+                "type": "Park-Ride",
+                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/kurzzeitparkplaetze-bahnhofstrasse/"
             }
         },
         {
@@ -79,7 +81,8 @@
                 "name": "Bronntor",
                 "address": "71083 Herrenberg",
                 "capacity": 90,
-                "type": "Parkhaus"
+                "type": "Tiefgarage",
+                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/bronntor-tiefgarage/"
             }
         },
         {
@@ -175,7 +178,8 @@
                 "name": "P+R Kalkofenstra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 398,
-                "type": "Park-Ride"
+                "type": "Park-Ride",
+                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/p-r-parkhaus/"
             }
         },
         {
@@ -273,6 +277,22 @@
                 "address": "71083 Herrenberg",
                 "capacity": 10,
                 "type": "Wohnmobilparkplatz"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  8.90220,
+                  48.58070
+                ]
+            },
+            "properties": {
+                "name": "Parken + Mitfahren A81/B296",
+                "address": "Parkplatz bei der Autobahnmeisterei",
+                "capacity": 10,
+                "type": "Parken-Mitfahren"
             }
         }
     ]
