@@ -292,7 +292,8 @@
                 "name": "Wohnmobilhafen Herrenberg",
                 "address": "71083 Herrenberg",
                 "capacity": 10,
-                "type": "Wohnmobilparkplatz"
+                "type": "Wohnmobilparkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Tourismus-Gaeste/uebernachten/Wohnmobilstellplaetze"
             }
         },
         {
