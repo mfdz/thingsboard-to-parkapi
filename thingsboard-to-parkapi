@@ -107,7 +107,9 @@ def fetch_static_lots():
                     "lat":          float(coords[1]),
                     "lng":          float(coords[0])
                 },
-                "total":            props["capacity"]
+                "total":            props["capacity"],
+                "url":              props.get("url"),
+                "opening_hours":    props.get("openingHours")
             }
             res.append(l)
 

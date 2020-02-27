@@ -292,7 +292,7 @@
                 "name": "Parken + Mitfahren A81/B296",
                 "address": "Parkplatz bei der Autobahnmeisterei",
                 "capacity": 10,
-                "type": "Parken-Mitfahren"
+                "type": "Park-Carpool"
             }
         }
     ]
