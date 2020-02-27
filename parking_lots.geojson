@@ -14,7 +14,8 @@
                 "name": "Aischbachstra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 58,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1016",
             }
         },
         {
@@ -31,7 +32,8 @@
                 "address": "71083 Herrenberg",
                 "capacity": 97,
                 "type": "Parkhaus",
-                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/altstadtgarage/"
+                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/altstadtgarage/",
+                "openingHours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off",
             }
         },
         {
@@ -48,7 +50,8 @@
                 "name": "Auf dem Graben",
                 "address": "71083 Herrenberg",
                 "capacity": 63,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1002",
             }
         },
         {
@@ -65,7 +68,8 @@
                 "address": "71083 Herrenberg",
                 "capacity": 47,
                 "type": "Park-Ride",
-                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/kurzzeitparkplaetze-bahnhofstrasse/"
+                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/kurzzeitparkplaetze-bahnhofstrasse/",
+                "openingHours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off",
             }
         },
         {
@@ -82,7 +86,8 @@
                 "address": "71083 Herrenberg",
                 "capacity": 90,
                 "type": "Tiefgarage",
-                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/bronntor-tiefgarage/"
+                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/bronntor-tiefgarage/",
+                "openingHours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off",
             }
         },
         {
@@ -98,7 +103,8 @@
                 "name": "G\u00fcltsteiner Stra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 69,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1022",
             }
         },
         {
@@ -114,7 +120,8 @@
                 "name": "Hasenplatz",
                 "address": "71083 Herrenberg",
                 "capacity": 20,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1021",
             }
         },
         {
@@ -130,7 +137,8 @@
                 "name": "Hindenburgstra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 19,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1019",
             }
         },
         {
@@ -146,7 +154,8 @@
                 "name": "Horber Stra\u00dfe/Nagolder Stra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 36,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1017",
             }
         },
         {
@@ -162,7 +171,8 @@
                 "name": "Nufringer Tor",
                 "address": "71083 Herrenberg",
                 "capacity": 242,
-                "type": "Parkhaus"
+                "type": "Parkhaus",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1012",
             }
         },
         {
@@ -179,7 +189,8 @@
                 "address": "71083 Herrenberg",
                 "capacity": 398,
                 "type": "Park-Ride",
-                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/p-r-parkhaus/"
+                "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/p-r-parkhaus/",
+                "openingHours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off",
             }
         },
         {
@@ -195,7 +206,8 @@
                 "name": "Seelesplatz",
                 "address": "71083 Herrenberg",
                 "capacity": 27,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1014",
             }
         },
         {
@@ -211,7 +223,8 @@
                 "name": "Stadthalle",
                 "address": "Ecke Seestra\u00dfe",
                 "capacity": 211,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1006",
             }
         },
         {
@@ -227,7 +240,8 @@
                 "name": "Volksbank",
                 "address": "71083 Herrenberg",
                 "capacity": 47,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1020",
             }
         },
         {
@@ -243,7 +257,8 @@
                 "name": "Wilhelmstra\u00dfe",
                 "address": "71083 Herrenberg",
                 "capacity": 18,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1023",
             }
         },
         {
@@ -259,7 +274,8 @@
                 "name": "Viehversteigerungshalle",
                 "address": "71083 Herrenberg",
                 "capacity": 95,
-                "type": "Parkplatz"
+                "type": "Parkplatz",
+                "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1025",
             }
         },
         {
