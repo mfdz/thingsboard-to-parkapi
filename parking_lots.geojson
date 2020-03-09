@@ -11,7 +11,7 @@
         ]
       },
       "properties": {
-        "name": "Aischbachstra\u00dfe",
+        "name": "Aischbachstraße",
         "address": "71083 Herrenberg",
         "capacity": 58,
         "type": "Parkplatz",
@@ -59,17 +59,32 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          8.863247,
-        48.593634
+          8.863247,48.593634
         ]
       },
       "properties": {
-        "name": "Bahnhofstra\u00dfe",
+        "name": "Kurzzeitparkplätze Bahnhofstraße",
         "address": "71083 Herrenberg",
         "capacity": 47,
-        "type": "Park-Ride",
+        "type": "Parkplatz",
         "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/kurzzeitparkplaetze-bahnhofstrasse/",
         "paidHours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.86126, 48.59309
+        ]
+      },
+      "properties": {
+        "name": "P+R Bahnhofstraße",
+        "address": "71083 Herrenberg",
+        "capacity": 122,
+        "type": "Park-Ride",
+        "url": "https://www.dbbahnpark.de/standorte/karte/parkplatz-bahnhof-herrenberg/"
       }
     },
     {
@@ -101,7 +116,7 @@
         ]
       },
       "properties": {
-        "name": "G\u00fcltsteiner Stra\u00dfe",
+        "name": "G\u00fcltsteiner Straße",
         "address": "71083 Herrenberg",
         "capacity": 69,
         "type": "Parkplatz",
@@ -135,7 +150,7 @@
         ]
       },
       "properties": {
-        "name": "Hindenburgstra\u00dfe",
+        "name": "Hindenburgstraße",
         "address": "71083 Herrenberg",
         "capacity": 19,
         "type": "Parkplatz",
@@ -152,7 +167,7 @@
         ]
       },
       "properties": {
-        "name": "Horber Stra\u00dfe/Nagolder Stra\u00dfe",
+        "name": "Horber Straße/Nagolder Straße",
         "address": "71083 Herrenberg",
         "capacity": 36,
         "type": "Parkplatz",
@@ -186,7 +201,7 @@
         ]
       },
       "properties": {
-        "name": "P+R Kalkofenstra\u00dfe",
+        "name": "P+R Kalkofenstraße",
         "address": "71083 Herrenberg",
         "capacity": 398,
         "type": "Park-Ride",
@@ -222,7 +237,7 @@
       },
       "properties": {
         "name": "Stadthalle",
-        "address": "Ecke Seestra\u00dfe",
+        "address": "Ecke Seestraße",
         "capacity": 211,
         "type": "Parkplatz",
         "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1006"
@@ -255,7 +270,7 @@
         ]
       },
       "properties": {
-        "name": "Wilhelmstra\u00dfe",
+        "name": "Wilhelmstraße",
         "address": "71083 Herrenberg",
         "capacity": 18,
         "type": "Parkplatz",
