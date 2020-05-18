@@ -52,7 +52,7 @@
         "capacity": 63,
         "type": "Parkplatz",
         "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1002",
-        "openingHours": "00:00-24:00; Tu,Sa 02:00-14:30 off;PH 00:00-24:00"
+        "openingHours": "Mo,We,Th,Fr,Su 00:00-24:00; Tu,Sa 00:00-02:00, 14:30-24:00; PH 00:00-24:00"
       }
     },
     {
