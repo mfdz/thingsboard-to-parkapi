@@ -146,23 +146,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          8.869475,
-        48.594798
-        ]
-      },
-      "properties": {
-        "name": "Hindenburgstraße",
-        "address": "71083 Herrenberg",
-        "capacity": 19,
-        "type": "Parkplatz",
-        "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1019"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           8.866325,
         48.595168
         ]
