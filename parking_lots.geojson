@@ -41,15 +41,33 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          8.869170,
-        48.595150
+          8.87029, 48.59502
+        ]
+      },
+      "properties": {
+        "id" : "946955a0-a5bb-11ea-8d72-81c79f744047",
+        "name": "Oberer Graben",
+        "address": "71083 Herrenberg",
+        "capacity": 24,
+        "type": "Parkplatz",
+        "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1002",
+        "openingHours": "Mo - Su 00:00-24:00; PH 00:00-24:00"
+      }
+    },
+
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.86898, 48.59518
         ]
       },
       "properties": {
         "id" : "5c4224c0-0a0e-11ea-9bc9-896973774264",
-        "name": "Auf dem Graben",
+        "name": "Unterer Graben",
         "address": "71083 Herrenberg",
-        "capacity": 63,
+        "capacity": 39,
         "type": "Parkplatz",
         "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1002",
         "openingHours": "Mo,We,Th,Fr,Su 00:00-24:00; Tu,Sa 00:00-02:00, 14:30-24:00; PH 00:00-24:00"
