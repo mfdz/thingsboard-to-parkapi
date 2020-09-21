@@ -118,7 +118,7 @@ def fetch_static_lots():
                 "address":          props["name"],
                 "name":             props["name"],
                 "forecast":         False,
-                "state":            "nodata",
+                "state":            props.get("state", "nodata")
                 "coords" : {
                     "lat":          float(coords[1]),
                     "lng":          float(coords[0])
