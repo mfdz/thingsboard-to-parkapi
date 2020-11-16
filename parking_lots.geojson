@@ -33,7 +33,7 @@
         "capacity": 97,
         "type": "Parkhaus",
         "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/altstadtgarage/",
-        "fee": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off"
+        "fee_hours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off"
       }
     },
     {
@@ -87,7 +87,7 @@
         "capacity": 47,
         "type": "Parkplatz",
         "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/kurzzeitparkplaetze-bahnhofstrasse/",
-        "fee": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off"
+        "fee_hours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off"
       }
     },
     {
@@ -121,8 +121,8 @@
         "capacity": 90,
         "type": "Tiefgarage",
         "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/bronntor-tiefgarage/",
-        "fee": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off",
         "openingHours": "Mo-Fr 07:30-22:00; Sa 07:30-18:00; PH off"
+        "fee_hours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off",
       }
     },
     {
@@ -207,7 +207,7 @@
         "capacity": 398,
         "type": "Park-Ride",
         "url": "https://stadtwerke.herrenberg.de/oepnv-parken/parken/sicher-und-zentral-parken/parkhaeuser-und-parkgebuehren/p-r-parkhaus/",
-        "fee": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off"
+        "fee_hours": "Mo-Fr 08:00-20:00; Sa 08:00-14:00; PH off"
       }
     },
     {
