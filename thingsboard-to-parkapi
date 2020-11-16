@@ -126,8 +126,8 @@ def fetch_static_lots():
                 "total":            props["capacity"],
                 "free":             props.get("free"),
                 "url":              props.get("url"),
-                "opening_hours":    props.get("openingHours")
                 "fee_hours":        props.get("fee_hours"),
+                "opening_hours":    props.get("opening_hours")
             }
             res.append(clean_nones(l))
 
