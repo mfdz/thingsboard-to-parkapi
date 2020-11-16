@@ -119,6 +119,9 @@ def fetch_static_lots():
                 "name":             props["name"],
                 "forecast":         False,
                 "state":            "nodata",
+                "lat":              float(coords[1]),
+                "lon":              float(coords[0]),
+                # deprecated: parkapi standard currently doesn't use nested propeties...
                 "coords" : {
                     "lat":          float(coords[1]),
                     "lng":          float(coords[0])
