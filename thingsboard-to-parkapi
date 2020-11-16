@@ -118,7 +118,7 @@ def fetch_static_lots():
                 "address":          props["name"],
                 "name":             props["name"],
                 "forecast":         False,
-                "state":            "nodata",
+                "state":            props.get("state", "nodata"),
                 "lat":              float(coords[1]),
                 "lon":              float(coords[0]),
                 # deprecated: parkapi standard currently doesn't use nested propeties...
@@ -145,9 +145,19 @@ print(f"Fetched {len(static_lots)} static parking lots")
 def merge_data(dynamic, static):
     for lot in static:
         id = lot.get("id")
-        if(id != None):
-            dynamic_lot = [x for x in dynamic if x["id"] == id][0]
-            lot["free"] = dynamic_lot["free"]
+        if id != None and lot["state"] != "closed":
+            dynamic_lots = [x for x in dynamic if x["id"] == id]
+            if len(dynamic_lots) > 0:
+                dynamic_lot = dynamic_lots[0]
+
+                lot["free"] = dynamic_lot["free"]
+                if lot["free"] <= 0:
+                    lot["status"] == "full"
+                elif lot["free"] <= 5 or lot["free"]/lot["total"] < 0.05:
+                    lot["status"] == "few"
+                else:
+                    lot["status"] == "many"
+                
 
     return static
 
