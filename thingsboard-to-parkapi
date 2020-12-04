@@ -7,21 +7,6 @@ import datetime
 import json
 from argparse import ArgumentParser
 
-# this is a terrible hack and is necessary because of a misconfigured AAAA record
-# see https://github.com/mfdz/digitransit-ansible/issues/11
-# remove as soon as this ticket has been closed
-import socket
-import requests.packages.urllib3.util.connection as urllib3_cn
-
-def allowed_gai_family():
-    """
-    https://github.com/shazow/urllib3/blob/master/urllib3/util/connection.py
-    """
-    family = socket.AF_INET # force IPv4
-    return family
-
-urllib3_cn.allowed_gai_family = allowed_gai_family
-
 parser = ArgumentParser()
 parser.add_argument("-o", "--output", help="write output to FILE", default="parkapi.json")
 parser.add_argument("-g", "--geojson", help="the static geojson input file", default="parking_lots.geojson")
