@@ -309,6 +309,7 @@
         "address": "71083 Herrenberg",
         "capacity": 10,
         "type": "Wohnmobilparkplatz",
+        "state": "closed",
         "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Tourismus-Gaeste/uebernachten/Wohnmobilstellplaetze"
       }
     },
@@ -322,9 +323,27 @@
         ]
       },
       "properties": {
-        "name": "Parken + Mitfahren A81/B296",
+        "name": "Parken + Mitfahren A81/B296 (Derzeit wg. Bauarbeiten gesperrt)",
         "address": "Parkplatz bei der Autobahnmeisterei",
         "capacity": 10,
+        "free": 0,
+        "type": "Park-Carpool",
+        "state": "closed"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+         8.89462,
+        48.57867
+        ]
+      },
+      "properties": {
+        "name": "Parken + Mitfahren A81 Herrenberg/Gültstein (Ersatzfläche)",
+        "address": "Parkplatz südl. Ohmstraße Gültstein",
+        "capacity": 50,
         "type": "Park-Carpool"
       }
     }
