@@ -28,6 +28,7 @@
         ]
       },
       "properties": {
+        "id": "ac230e00-2cea-11eb-93e4-7f8bf428cc7a",
         "name": "Altstadtgarage",
         "address": "71083 Herrenberg",
         "capacity": 97,
@@ -116,6 +117,7 @@
         ]
       },
       "properties": {
+        "id": "8f6e3300-2cec-11eb-93e4-7f8bf428cc7a",
         "name": "Bronntor",
         "address": "71083 Herrenberg",
         "capacity": 90,
@@ -186,6 +188,7 @@
         ]
       },
       "properties": {
+        "id": "ff4bb360-2ceb-11eb-93e4-7f8bf428cc7a",
         "name": "Nufringer Tor",
         "address": "71083 Herrenberg",
         "capacity": 242,
@@ -236,6 +239,7 @@
         ]
       },
       "properties": {
+        "id": "07caf0a0-2ce7-11eb-93e4-7f8bf428cc7a",
         "name": "Stadthalle",
         "address": "Ecke Seestraße",
         "capacity": 211,
@@ -335,7 +339,7 @@
         "state": "closed",
         "notes": {
           "de": "Derzeit wegen Bauarbeiten gesperrt bis voraussichtlich Frühjahr 2022.",
-          "en": "Currently closed due tu construction works until spring 2022." 
+          "en": "Currently closed due tu construction works until spring 2022."
         }
       }
     },
