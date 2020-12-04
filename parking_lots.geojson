@@ -310,7 +310,11 @@
         "capacity": 10,
         "type": "Wohnmobilparkplatz",
         "state": "closed",
-        "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Tourismus-Gaeste/uebernachten/Wohnmobilstellplaetze"
+        "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Tourismus-Gaeste/uebernachten/Wohnmobilstellplaetze",
+        "notes": {
+          "de": "Der Herrenberger Wohnmobil Stellplatz ist aufgrund der aktuellen Situation auch noch im Dezember gesperrt.",
+          "en": "Due to COVID19, the camping site 'Wohnmobilhafen' is currently closed."
+        }
       }
     },
     {
@@ -328,7 +332,11 @@
         "capacity": 10,
         "free": 0,
         "type": "Park-Carpool",
-        "state": "closed"
+        "state": "closed",
+        "notes": {
+          "de": "Derzeit wegen Bauarbeiten gesperrt bis voraussichtlich Frühjahr 2022.",
+          "en": "Currently closed due tu construction works until spring 2022." 
+        }
       }
     },
     {
