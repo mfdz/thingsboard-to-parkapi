@@ -390,6 +390,22 @@
         "capacity": 1,
         "type": "Barrierefreier-Parkplatz"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.87005,48.59543
+        ]
+      },
+      "properties": {
+        "id": "e4de7700-3025-11eb-93e4-7f8bf428cc7a",
+        "name": "Barrierefreier Parkplatz Spitalgasse",
+        "address": "Spitalgasse",
+        "capacity": 1,
+        "type": "Barrierefreier-Parkplatz"
+      }
     }
   ]
 }
