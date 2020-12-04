@@ -147,7 +147,11 @@ print(f"Fetched {len(static_lots)} static parking lots")
 def merge_data(dynamic, static):
     for lot in static:
         id = lot.get("id")
-        if id != None and lot["state"] != "closed":
+        if id == None:
+            lot["state"] = "nodata"
+        elif lot["state"] == "closed":
+            pass
+        else:
             dynamic_lots = [x for x in dynamic if x["id"] == id]
             if len(dynamic_lots) > 0:
                 dynamic_lot = dynamic_lots[0]
@@ -166,8 +170,6 @@ def merge_data(dynamic, static):
                     lot["state"] = "few"
                 else:
                     lot["state"] = "many"
-        else:
-            lot["state"] = "nodata"
 
     return static
 
