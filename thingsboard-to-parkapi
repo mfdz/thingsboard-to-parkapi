@@ -94,6 +94,7 @@ def fetch_static_lots():
             coords = lot["geometry"]["coordinates"]
             l = {
                 "id":               props.get("id"),
+                "id:disabled":      props.get("id:disabled"),
                 "lot_type":         props["type"],
                 "address":          props["name"],
                 "name":             props["name"],
@@ -124,7 +125,13 @@ ids = list(map(lambda lot : lot.get("id"), static_lots))
 # remove Nones (strange python syntax if you ask me)
 ids = list(filter(None, ids))
 
-dynamic_lots = list(map(fetch_dynamic_lot, ids))
+disabled_ids = list(map(lambda lot : lot.get("id:disabled"), static_lots))
+# remove None
+disabled_ids = list(filter(None, disabled_ids))
+
+all_ids = ids + disabled_ids
+
+dynamic_lots = list(map(fetch_dynamic_lot, all_ids))
 
 print(f"Fetched occupancy information for {len(dynamic_lots)} parking lots")
 print(f"Fetched {len(static_lots)} static parking lots")
@@ -132,6 +139,8 @@ print(f"Fetched {len(static_lots)} static parking lots")
 def merge_data(dynamic, static):
     for lot in static:
         id = lot.get("id")
+        id_disabled = lot.get("id:disabled")
+
         if id == None:
             lot["state"] = "nodata"
         elif lot["state"] == "closed":
@@ -155,6 +164,16 @@ def merge_data(dynamic, static):
                     lot["state"] = "few"
                 else:
                     lot["state"] = "many"
+
+        # dealing with parking lots that have additional wheelchair parking
+        # bays; here we just set the free:disabled property and are done
+        if id_disabled != None:
+            disabled_lots = [x for x in dynamic if x["id"] == id_disabled]
+
+            if len(disabled_lots) > 0:
+                disabled_lot = disabled_lots[0]
+
+                lot["free:disabled"] = disabled_lot["free"]
 
     return static
 
