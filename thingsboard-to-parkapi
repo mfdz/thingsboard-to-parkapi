@@ -153,7 +153,7 @@ def merge_data(dynamic, static):
                 dynamic_lot = dynamic_lots[0]
 
                 free = dynamic_lot["free"]
-                total = lot.get("total", "total:wheelchair")
+                total = int(lot.get("total", lot.get("total:wheelchair")))
 
                 if lot["lot_type"] == "Barrierefreier-Parkplatz":
                     lot["free:wheelchair"] = free
@@ -162,14 +162,12 @@ def merge_data(dynamic, static):
 
                 if free <= 0:
                     lot["state"] = "full"
-                elif free <= 5 or free/total < 0.05:
+                elif free/total < 0.05:
                     lot["state"] = "few"
                 else:
                     lot["state"] = "many"
         else:
             lot["state"] = "nodata"
-
-
 
     return static
 
