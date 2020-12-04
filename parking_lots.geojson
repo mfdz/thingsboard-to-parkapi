@@ -371,7 +371,7 @@
         "id": "5251cba0-3019-11eb-93e4-7f8bf428cc7a",
         "name": "Barrierefreier Parkplatz Marktplatz",
         "address": "Marktplatz",
-        "capacity": 1,
+        "capacity:wheelchair": 1,
         "type": "Barrierefreier-Parkplatz"
       }
     },
