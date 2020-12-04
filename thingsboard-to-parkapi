@@ -141,10 +141,10 @@ def merge_data(dynamic, static):
         id = lot.get("id")
         id_disabled = lot.get("id:disabled")
 
-        if id == None:
-            lot["state"] = "nodata"
-        elif lot["state"] == "closed":
+        if lot["state"] == "closed":
             pass
+        elif id == None:
+            lot["state"] = "nodata"
         else:
             dynamic_lots = [x for x in dynamic if x["id"] == id]
             if len(dynamic_lots) > 0:
