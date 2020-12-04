@@ -23,8 +23,8 @@ def allowed_gai_family():
 urllib3_cn.allowed_gai_family = allowed_gai_family
 
 parser = ArgumentParser()
-parser.add_argument("-o", "--output", help="write output to FILE")
-parser.add_argument("-g", "--geojson", help="the static geojson input file")
+parser.add_argument("-o", "--output", help="write output to FILE", default="parkapi.json")
+parser.add_argument("-g", "--geojson", help="the static geojson input file", default="parking_lots.geojson")
 args = parser.parse_args()
 
 base_url = "https://portal.mhascaro.com/api"
@@ -47,7 +47,7 @@ list_url = f"{base_url}/entityGroup/3c521c80-53bd-11ea-aa10-3316385c1cc2/entitie
 
 response = requests.get(list_url, headers=auth_headers)
 
-parking_lots = response.json()["data"]
+parking_lots = response.json().get("data", [])
 
 def get_attribute(items, name):
     for i in items:
@@ -118,7 +118,10 @@ def fetch_static_lots():
                 "address":          props["name"],
                 "name":             props["name"],
                 "forecast":         False,
-                "state":            props.get("state", "nodata")
+                "state":            props.get("state", "nodata"),
+                "lat":              float(coords[1]),
+                "lon":              float(coords[0]),
+                # deprecated: parkapi standard currently doesn't use nested properties...
                 "coords" : {
                     "lat":          float(coords[1]),
                     "lng":          float(coords[0])
@@ -126,8 +129,8 @@ def fetch_static_lots():
                 "total":            props["capacity"],
                 "free":             props.get("free"),
                 "url":              props.get("url"),
-                "paid_hours":       props.get("paidHours"),
-                "opening_hours":    props.get("openingHours")
+                "fee_hours":        props.get("fee_hours"),
+                "opening_hours":    props.get("opening_hours")
             }
             res.append(clean_nones(l))
 
@@ -142,9 +145,19 @@ print(f"Fetched {len(static_lots)} static parking lots")
 def merge_data(dynamic, static):
     for lot in static:
         id = lot.get("id")
-        if(id != None):
-            dynamic_lot = [x for x in dynamic if x["id"] == id][0]
-            lot["free"] = dynamic_lot["free"]
+        if id != None and lot["state"] != "closed":
+            dynamic_lots = [x for x in dynamic if x["id"] == id]
+            if len(dynamic_lots) > 0:
+                dynamic_lot = dynamic_lots[0]
+
+                lot["free"] = dynamic_lot["free"]
+                if lot["free"] <= 0:
+                    lot["status"] == "full"
+                elif lot["free"] <= 5 or lot["free"]/lot["total"] < 0.05:
+                    lot["status"] == "few"
+                else:
+                    lot["status"] == "many"
+
 
     return static
 
