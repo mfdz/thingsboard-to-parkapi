@@ -161,13 +161,13 @@ def merge_data(dynamic, static):
                     lot["free"] = free
 
                 if free <= 0:
-                    lot["status"] = "full"
+                    lot["state"] = "full"
                 elif free <= 5 or free/total < 0.05:
-                    lot["status"] = "few"
+                    lot["state"] = "few"
                 else:
-                    lot["status"] = "many"
+                    lot["state"] = "many"
         else:
-            lot["status"] = "nodata"
+            lot["state"] = "nodata"
 
 
 
