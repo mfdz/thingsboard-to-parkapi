@@ -349,8 +349,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-         8.89462,
-        48.57867
+         8.89462,48.57867
         ]
       },
       "properties": {
@@ -358,6 +357,22 @@
         "address": "Parkplatz südl. Ohmstraße Gültstein",
         "capacity": 50,
         "type": "Park-Carpool"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.87055,48.59638
+        ]
+      },
+      "properties": {
+        "id": "5251cba0-3019-11eb-93e4-7f8bf428cc7a",
+        "name": "Barrierefreier Parkplatz Marktplatz",
+        "address": "Marktplatz",
+        "capacity": 1,
+        "type": "Parkplatz"
       }
     }
   ]

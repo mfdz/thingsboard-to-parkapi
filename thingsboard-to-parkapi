@@ -43,12 +43,6 @@ auth_headers = {
     "X-Authorization": f"Bearer {token}"
 }
 
-#list_url = f"{base_url}/entityGroup/3c521c80-53bd-11ea-aa10-3316385c1cc2/entities?limit=100"
-
-#response = requests.get(list_url, headers=auth_headers)
-
-#parking_lots = response.json().get("data", [])
-
 def get_attribute(items, name):
     for i in items:
         if(i["key"] == name):
@@ -142,7 +136,6 @@ static_lots = fetch_static_lots()
 ids = list(map(lambda lot : lot.get("id"), static_lots))
 # remove Nones (strange python syntax if you ask me)
 ids = list(filter(None, ids))
-print(ids)
 
 dynamic_lots = list(map(fetch_dynamic_lot, ids))
 
