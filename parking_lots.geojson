@@ -371,7 +371,7 @@
         "id": "5251cba0-3019-11eb-93e4-7f8bf428cc7a",
         "name": "Barrierefreier Parkplatz Marktplatz",
         "address": "Marktplatz",
-        "capacity:wheelchair": 1,
+        "capacity:disabled": 1,
         "type": "Barrierefreier-Parkplatz"
       }
     },
@@ -387,7 +387,7 @@
         "id": "e4de7700-3025-11eb-93e4-7f8bf428cc7a",
         "name": "Barrierefreier Parkplatz Stuttgarter Straße",
         "address": "Stuttgarter Straße",
-        "capacity:wheelchair": 1,
+        "capacity:disabled": 1,
         "type": "Barrierefreier-Parkplatz"
       }
     },
@@ -403,7 +403,7 @@
         "id": "c8aa76b0-3025-11eb-93e4-7f8bf428cc7a",
         "name": "Barrierefreier Parkplatz Spitalgasse",
         "address": "Spitalgasse",
-        "capacity:wheelchair": 1,
+        "capacity:disabled": 1,
         "type": "Barrierefreier-Parkplatz"
       }
     },
@@ -419,7 +419,7 @@
         "id": "ae89cd60-3022-11eb-93e4-7f8bf428cc7a",
         "name": "Barrierefreier Parkplatz Oberamt",
         "address": "Oberamt",
-        "capacity:wheelchair": 1,
+        "capacity:disabled": 1,
         "type": "Barrierefreier-Parkplatz"
       }
     }

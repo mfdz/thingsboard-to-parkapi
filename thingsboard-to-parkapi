@@ -122,7 +122,7 @@ def fetch_static_lots():
                     "lng":          float(coords[0])
                 },
                 "total":            props.get("capacity"),
-                "total:wheelchair": props.get("capacity:wheelchair"),
+                "total:disabled": props.get("capacity:disabled"),
 
                 "url":              props.get("url"),
                 "fee_hours":        props.get("fee_hours"),
@@ -157,10 +157,10 @@ def merge_data(dynamic, static):
                 dynamic_lot = dynamic_lots[0]
 
                 free = dynamic_lot["free"]
-                total = int(lot.get("total", lot.get("total:wheelchair")))
+                total = int(lot.get("total", lot.get("total:disabled")))
 
                 if lot["lot_type"] == "Barrierefreier-Parkplatz":
-                    lot["free:wheelchair"] = free
+                    lot["free:disabled"] = free
                 else:
                     lot["free"] = free
 
