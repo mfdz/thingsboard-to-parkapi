@@ -406,6 +406,23 @@
         "capacity:wheelchair": 1,
         "type": "Barrierefreier-Parkplatz"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.87085,48.59612
+        ]
+      },
+      "properties": {
+        "id": "ae89cd60-3022-11eb-93e4-7f8bf428cc7a",
+        "name": "Barrierefreier Parkplatz Oberamt",
+        "address": "Oberamt",
+        "capacity:wheelchair": 1,
+        "type": "Barrierefreier-Parkplatz"
+      }
     }
+
   ]
 }
