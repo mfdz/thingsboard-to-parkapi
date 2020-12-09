@@ -243,7 +243,7 @@
         ]
       },
       "properties": {
-        "id": "07caf0a0-2ce7-11eb-93e4-7f8bf428cc7a",
+        "deactivated:id": "07caf0a0-2ce7-11eb-93e4-7f8bf428cc7a",
         "name": "Stadthalle",
         "address": "Ecke Seestraße",
         "capacity": 325,
@@ -261,10 +261,10 @@
         ]
       },
       "properties": {
-        "id": "2fa0dbe0-2ceb-11eb-93e4-7f8bf428cc7a",
+        "deactivated:id": "2fa0dbe0-2ceb-11eb-93e4-7f8bf428cc7a",
         "name": "Volksbank",
         "address": "71083 Herrenberg",
-        "capacity": 47,
+        "capacity": 45,
         "type": "Parkplatz",
         "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1020"
       }
