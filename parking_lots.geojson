@@ -47,11 +47,9 @@
       },
       "properties": {
         "id" : "946955a0-a5bb-11ea-8d72-81c79f744047",
-        "id:disabled" : "8344f5f0-3025-11eb-93e4-7f8bf428cc7a",
         "name": "Oberer Graben",
         "address": "71083 Herrenberg",
         "capacity": 24,
-        "capacity:disabled": 1,
         "type": "Parkplatz",
         "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1002",
         "opening_hours": "Mo - Su 00:00-24:00; PH 00:00-24:00"
@@ -68,11 +66,9 @@
       },
       "properties": {
         "id" : "5c4224c0-0a0e-11ea-9bc9-896973774264",
-        "id:disabled": "c08d81e0-3023-11eb-93e4-7f8bf428cc7a",
         "name": "Unterer Graben",
         "address": "71083 Herrenberg",
         "capacity": 39,
-        "capacity:disabled": 2,
         "type": "Parkplatz",
         "url": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze/Parkplatz?view=publish&item=parkingLocation&id=1002",
         "opening_hours": "Mo,We,Th,Fr,Su 00:00-24:00; Tu,Sa 00:00-02:00, 14:30-24:00; PH 00:00-24:00"
@@ -391,22 +387,6 @@
         "id": "e4de7700-3025-11eb-93e4-7f8bf428cc7a",
         "name": "Stuttgarter Straße - Parkplatz für Menschen mit Behinderung",
         "address": "Stuttgarter Straße",
-        "capacity:disabled": 1,
-        "type": "Barrierefreier-Parkplatz"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          8.87005,48.59543
-        ]
-      },
-      "properties": {
-        "id": "c8aa76b0-3025-11eb-93e4-7f8bf428cc7a",
-        "name": "Spitalgasse - Parkplatz für Menschen mit Behinderung",
-        "address": "Spitalgasse",
         "capacity:disabled": 1,
         "type": "Barrierefreier-Parkplatz"
       }
