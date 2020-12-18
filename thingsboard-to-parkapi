@@ -140,13 +140,16 @@ def fetch_static_lots_csv(csv_url):
                     "lat":          float(lot.get("lat")),
                     "lng":          float(lot.get("lon"))
                 },
-                "total":            lot.get("capacity"),
-                "total:disabled": lot.get("capacity:disabled"),
+                "total":            int(lot.get("capacity")) if lot.get("capacity") != '' else None,
+                "total:disabled":   int(lot.get("capacity:disabled")) if lot.get("capacity:disabled") != '' else None,
 
                 "url":              lot.get("url"),
                 "fee_hours":        lot.get("fee_hours"),
                 "opening_hours":    lot.get("opening_hours"),
-                "notes":            lot.get("notes")
+                "notes": {
+                    "de": lot.get("notes:de"),
+                    "en": lot.get("notes:en")
+                }
             }
 
             res.append(clean_nones(l))
