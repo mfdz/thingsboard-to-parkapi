@@ -74,16 +74,16 @@ def fetch_dynamic_lot(id):
 
 def clean_nones(value):
     """
-    Recursively remove all None values from dictionaries and lists, and returns
+    Recursively remove all None or empty string values from dictionaries and lists, and returns
     the result as a new dictionary or list.
     """
     if isinstance(value, list):
-        return [clean_nones(x) for x in value if x is not None]
+        return [clean_nones(x) for x in value if x is not None and x != '']
     elif isinstance(value, dict):
         return {
             key: clean_nones(val)
             for key, val in value.items()
-            if val is not None
+            if val is not None and val != ''
         }
     else:
         return value
@@ -138,10 +138,10 @@ def fetch_static_lots_csv(csv_url):
                 "address":          lot.get("name"),
                 "name":             lot.get("name"),
                 "forecast":         False,
-                "state":            lot.get("state", "nodata"),
                 "lat":              float(lot.get("lat")),
                 "lon":              float(lot.get("lon")),
                 # deprecated: parkapi standard currently doesn't use nested properties...
+                "state":            lot.get("state") if lot.get("state") != '' else 'nodata',
                 "coords" : {
                     "lat":          float(lot.get("lat")),
                     "lng":          float(lot.get("lon"))
