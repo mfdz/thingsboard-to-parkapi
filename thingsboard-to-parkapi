@@ -1,15 +1,19 @@
 #! /usr/bin/env python3
 
 import requests
+import csv
 import os
 import operator
 import datetime
 import json
+import sys
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
 parser.add_argument("-o", "--output", help="write output to FILE", default="parkapi.json")
 parser.add_argument("-g", "--geojson", help="the static geojson input file", default="parking_lots.geojson")
+parser.add_argument("-c", "--csv", help="the static csv input file", default="https://docs.google.com/spreadsheets/d/e/2PACX-1vSR33H_M8stQ5bhrVN0huYZkMhGONymIWKNRNvam2VYnBBUElUwsI5Fa8wK9mOYO0ZPg69RYH49h3ho/pub?gid=0&single=true&output=csv")
+
 args = parser.parse_args()
 
 base_url = "https://portal.mhascaro.com/api"
@@ -120,7 +124,47 @@ def fetch_static_lots():
 
     return res
 
-static_lots = fetch_static_lots()
+def fetch_static_lots_csv(csv_url):
+    res = []
+    with requests.get(csv_url, stream=True) as r:
+        lines = (line.decode('utf-8') for line in r.iter_lines())
+        reader = csv.DictReader(lines, delimiter=',')
+        
+        for lot in reader:            
+            l = {
+                "id":               lot.get("id"),
+                "id:disabled":      lot.get("id:disabled"),
+                "lot_type":         lot.get("type"),
+                "address":          lot.get("name"),
+                "name":             lot.get("name"),
+                "forecast":         False,
+                "state":            lot.get("state", "nodata"),
+                "lat":              float(lot.get("lat")),
+                "lon":              float(lot.get("lon")),
+                # deprecated: parkapi standard currently doesn't use nested properties...
+                "coords" : {
+                    "lat":          float(lot.get("lat")),
+                    "lng":          float(lot.get("lon"))
+                },
+                "total":            lot.get("capacity"),
+                "total:disabled": lot.get("capacity:disabled"),
+
+                "url":              lot.get("url"),
+                "fee_hours":        lot.get("fee_hours"),
+                "opening_hours":    lot.get("opening_hours"),
+                "notes":            lot.get("notes")
+            }
+
+            res.append(clean_nones(l))
+
+        return res
+
+try:
+    static_lots = fetch_static_lots_csv(args.csv)
+except Exception as e :
+    print("Unexpected error:", e)
+    static_lots = fetch_static_lots()
+
 ids = list(map(lambda lot : lot.get("id"), static_lots))
 # remove Nones (strange python syntax if you ask me)
 ids = list(filter(None, ids))
