@@ -47,30 +47,33 @@ def get_timeseries_value(timeseries, name):
 def fetch_dynamic_lot(id):
 
     print(f"Fetching information for lot {id}")
+    
+    try: 
+        attribute_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/attributes?keys=address,latitude,longitude"
+        attrs = requests.get(attribute_url, headers=auth_headers).json()
 
-    attribute_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/attributes?keys=address,latitude,longitude"
-    attrs = requests.get(attribute_url, headers=auth_headers).json()
+        timeseries_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/timeseries?keys=latestSumParkingState,SumOccupied,TotalParking_mapping"
+        timeseries = requests.get(timeseries_url, headers=auth_headers).json()
+        total = get_timeseries_value(timeseries, "TotalParking_mapping")
+        occupied = get_timeseries_value(timeseries, "latestSumParkingState")
+        free = total - occupied
 
-    timeseries_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/timeseries?keys=latestSumParkingState,SumOccupied,TotalParking_mapping"
-    timeseries = requests.get(timeseries_url, headers=auth_headers).json()
-    total = get_timeseries_value(timeseries, "TotalParking_mapping")
-    occupied = get_timeseries_value(timeseries, "latestSumParkingState")
-    free = total - occupied
-
-    return {
-        "id":               id,
-        "lot_type":         "Parkplatz",
-        "address":          get_attribute(attrs, "address"),
-        "name":             get_attribute(attrs, "address"),
-        "forecast":         False,
-        "state":            "open",
-        "coords" : {
-            "lat":          get_attribute(attrs, "latitude"),
-            "lng":          get_attribute(attrs, "longitude"),
-        },
-        "total":            total,
-        "free":             free,
-    }
+        return {
+            "id":               id,
+            "lot_type":         "Parkplatz",
+            "address":          get_attribute(attrs, "address"),
+            "name":             get_attribute(attrs, "address"),
+            "forecast":         False,
+            "state":            "open",
+            "coords" : {
+                "lat":          get_attribute(attrs, "latitude"),
+                "lng":          get_attribute(attrs, "longitude"),
+            },
+            "total":            total,
+            "free":             free,
+        }
+    except:
+        return {}
 
 def clean_nones(value):
     """
@@ -187,7 +190,7 @@ def merge_data(dynamic, static):
         elif id == None:
             lot["state"] = "nodata"
         else:
-            dynamic_lots = [x for x in dynamic if x["id"] == id]
+            dynamic_lots = [x for x in dynamic if x.get("id") == id]
             if len(dynamic_lots) > 0:
                 dynamic_lot = dynamic_lots[0]
 
@@ -209,7 +212,7 @@ def merge_data(dynamic, static):
         # dealing with parking lots that have additional wheelchair parking
         # bays; here we just set the free:disabled property and are done
         if id_disabled != None:
-            disabled_lots = [x for x in dynamic if x["id"] == id_disabled]
+            disabled_lots = [x for x in dynamic if x.get("id") == id_disabled]
 
             if len(disabled_lots) > 0:
                 disabled_lot = disabled_lots[0]
