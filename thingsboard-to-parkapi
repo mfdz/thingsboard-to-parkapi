@@ -9,29 +9,6 @@ import json
 import sys
 from argparse import ArgumentParser
 
-parser = ArgumentParser()
-parser.add_argument("-o", "--output", help="write output to FILE", default="parkapi.json")
-parser.add_argument("-g", "--geojson", help="the static geojson input file", default="parking_lots.geojson")
-parser.add_argument("-c", "--csv", help="the static csv input file", default="https://docs.google.com/spreadsheets/d/e/2PACX-1vSR33H_M8stQ5bhrVN0huYZkMhGONymIWKNRNvam2VYnBBUElUwsI5Fa8wK9mOYO0ZPg69RYH49h3ho/pub?gid=0&single=true&output=csv")
-
-args = parser.parse_args()
-
-base_url = os.environ['THINGSBOARD_API_URL']
-
-token_url = f"{base_url}/auth/login"
-
-payload = {
-    "username": os.environ['THINGSBOARD_USERNAME'],
-    "password": os.environ['THINGSBOARD_PASSWORD']
-}
-
-response = requests.post(token_url, json=payload)
-token = response.json()["token"]
-
-auth_headers = {
-    "X-Authorization": f"Bearer {token}"
-}
-
 def get_attribute(items, name):
     for i in items:
         if(i["key"] == name):
@@ -75,6 +52,38 @@ def fetch_dynamic_lot(id):
     except:
         return {}
 
+def fetch_dynamic_lots(static_lots):
+    base_url = os.environ['THINGSBOARD_API_URL']
+
+    token_url = f"{base_url}/auth/login"
+
+    payload = {
+        "username": os.environ['THINGSBOARD_USERNAME'],
+        "password": os.environ['THINGSBOARD_PASSWORD']
+    }
+
+    response = requests.post(token_url, json=payload)
+    token = response.json()["token"]
+
+    auth_headers = {
+        "X-Authorization": f"Bearer {token}"
+    }
+    ids = list(map(lambda lot : lot.get("id"), static_lots))
+    # remove Nones (strange python syntax if you ask me)
+    ids = list(filter(None, ids))
+
+    disabled_ids = list(map(lambda lot : lot.get("id:disabled"), static_lots))
+    # remove None
+    disabled_ids = list(filter(None, disabled_ids))
+
+    all_ids = ids + disabled_ids
+
+    dynamic_lots = list(map(fetch_dynamic_lot, all_ids))
+
+    print(f"Fetched occupancy information for {len(dynamic_lots)} parking lots")
+
+    return dynamic_lots
+
 def clean_nones(value):
     """
     Recursively remove all None or empty string values from dictionaries and lists, and returns
@@ -91,9 +100,9 @@ def clean_nones(value):
     else:
         return value
 
-def fetch_static_lots():
+def fetch_static_lots_geojson(geojson_file):
     res = []
-    with open(args.geojson, 'r', encoding='utf-8') as f:
+    with open(geojson_file, 'r', encoding='utf-8') as f:
         geojson = json.load(f)
 
         for lot in geojson["features"]:
@@ -135,7 +144,7 @@ def fetch_static_lots_csv(csv_url):
                 "id":               lot.get("id"),
                 "id:disabled":      lot.get("id:disabled"),
                 "lot_type":         lot.get("type"),
-                "address":          lot.get("name"),
+                "address":          lot.get("address"),
                 "name":             lot.get("name"),
                 "forecast":         False,
                 "state":            lot.get("state") if lot.get("state") != '' else 'nodata',
@@ -158,27 +167,6 @@ def fetch_static_lots_csv(csv_url):
             res.append(clean_nones(l))
 
         return res
-
-try:
-    static_lots = fetch_static_lots_csv(args.csv)
-except Exception as e :
-    print("Unexpected error:", e)
-    static_lots = fetch_static_lots()
-
-ids = list(map(lambda lot : lot.get("id"), static_lots))
-# remove Nones (strange python syntax if you ask me)
-ids = list(filter(None, ids))
-
-disabled_ids = list(map(lambda lot : lot.get("id:disabled"), static_lots))
-# remove None
-disabled_ids = list(filter(None, disabled_ids))
-
-all_ids = ids + disabled_ids
-
-dynamic_lots = list(map(fetch_dynamic_lot, all_ids))
-
-print(f"Fetched occupancy information for {len(dynamic_lots)} parking lots")
-print(f"Fetched {len(static_lots)} static parking lots")
 
 def merge_data(dynamic, static):
     for lot in static:
@@ -221,16 +209,44 @@ def merge_data(dynamic, static):
 
     return static
 
-utc_now = datetime.datetime.utcnow().isoformat()
+def write_parkapi(outfile, lots, data_source):
+    utc_now = datetime.datetime.utcnow().isoformat()
 
-parken_api_response = {
-    "data_source": "https://www.herrenberg.de/de/Stadtleben/Erlebnis-Herrenberg/Service/Parkplaetze",
-    "last_downloaded": utc_now,
-    "last_updated": utc_now,
-    "lots": merge_data(dynamic_lots, static_lots)
-}
+    parken_api_response = {
+        "data_source": data_source,
+        "last_downloaded": utc_now,
+        "last_updated": utc_now,
+        "lots": lots
+    }
 
-with open(args.output, 'w', encoding='utf-8') as f:
-    json.dump(parken_api_response, f, ensure_ascii=False, indent=2)
+    with open(outfile, 'w', encoding='utf-8') as f:
+        json.dump(parken_api_response, f, ensure_ascii=False, indent=2)
 
-print(f"Wrote output to {args.output}")
+    print(f"Wrote output to {outfile}")
+
+if __name__ == '__main__':
+    parser = ArgumentParser()
+
+    parser.add_argument('--realtime', help="retrieve realtime infos from thingsboard", dest='realtime', action='store_true')
+    parser.add_argument('--no-realtime', help="do not retrieve realtime infos from thingsboard", dest='realtime', action='store_false')
+    parser.set_defaults(realtime=True)
+    parser.add_argument("-o", "--output", help="write output to FILE", default="parkapi.json")
+    parser.add_argument("-g", "--geojson", help="the static geojson input file", default="parking_lots.geojson")
+    parser.add_argument("-c", "--csv", help="the static csv input file")
+    parser.add_argument("-s", "--data_source", help="Data source cited in parkapi.json")
+
+    args = parser.parse_args()
+
+    if (args.csv):
+        static_lots = fetch_static_lots_csv(args.csv)
+    else:
+        static_lots = fetch_static_lots_geojson(args.geojson)
+    print(f"Fetched {len(static_lots)} static parking lots")
+
+    if args.realtime:
+        dynamic_lots = fetch_dynamic_lots(static_lots)
+    else:
+        dynamic_lots = {}
+    
+    write_parkapi(args.output, merge_data(dynamic_lots, static_lots), args.data_source)
+
