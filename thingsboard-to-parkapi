@@ -21,7 +21,7 @@ def get_timeseries_value(timeseries, name):
     else:
         return int(float(val))
 
-def fetch_dynamic_lot(id):
+def fetch_dynamic_lot(base_url, auth_headers, id):
 
     print(f"Fetching information for lot {id}")
     
@@ -49,7 +49,8 @@ def fetch_dynamic_lot(id):
             "total":            total,
             "free":             free,
         }
-    except:
+    except Exception as e:
+        print(e)
         return {}
 
 def fetch_dynamic_lots(static_lots):
@@ -78,7 +79,7 @@ def fetch_dynamic_lots(static_lots):
 
     all_ids = ids + disabled_ids
 
-    dynamic_lots = list(map(fetch_dynamic_lot, all_ids))
+    dynamic_lots = list(map(lambda id: fetch_dynamic_lot(base_url, auth_headers, id), all_ids))
 
     print(f"Fetched occupancy information for {len(dynamic_lots)} parking lots")
 
