@@ -9,6 +9,8 @@ import json
 import sys
 from argparse import ArgumentParser
 
+CITY="herrenberg"
+
 def get_attribute(items, name):
     for i in items:
         if(i["key"] == name):
@@ -20,6 +22,35 @@ def get_timeseries_value(timeseries, name):
         return 0
     else:
         return int(float(val))
+
+def remove_special_chars(string):
+    """
+    Remove any umlauts, spaces and punctuation from a string.
+
+    :param string:
+    :return:
+    """
+    replacements = {
+        "ä": "ae",
+        "ö": "oe",
+        "ü": "ue",
+        "ß": "ss",
+        "-": "",
+        " ": "",
+        ".": "",
+        ",": "",
+        "'": "",
+        "+": "",
+        "\"": "",
+        "/": "",
+        "\\": "",
+        "\n": "",
+        "\t": ""
+    }
+    for repl in replacements.keys():
+        string = string.replace(repl, replacements[repl])
+    return string
+
 
 def fetch_dynamic_lot(base_url, auth_headers, id):
 
@@ -35,11 +66,12 @@ def fetch_dynamic_lot(base_url, auth_headers, id):
         occupied = get_timeseries_value(timeseries, "latestSumParkingState")
         free = total - occupied
 
+        address = get_attribute(attrs, "address")
         return {
             "id":               id,
             "lot_type":         "Parkplatz",
-            "address":          get_attribute(attrs, "address"),
-            "name":             get_attribute(attrs, "address"),
+            "address":          address,
+            "name":             address,
             "forecast":         False,
             "state":            "open",
             "coords" : {
@@ -213,6 +245,11 @@ def merge_data(dynamic, static):
 def write_parkapi(outfile, lots, data_source):
     utc_now = datetime.datetime.utcnow().isoformat()
 
+    cnt = 0
+    for lot in lots:
+        cnt = cnt+1
+        lot["id"] = CITY + remove_special_chars(lot.get('name', str(cnt)).lower())
+
     parken_api_response = {
         "data_source": data_source,
         "last_downloaded": utc_now,
@@ -249,5 +286,6 @@ if __name__ == '__main__':
     else:
         dynamic_lots = {}
     
+
     write_parkapi(args.output, merge_data(dynamic_lots, static_lots), args.data_source)
 
