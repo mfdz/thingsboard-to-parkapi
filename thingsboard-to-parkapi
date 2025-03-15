@@ -60,11 +60,11 @@ def fetch_dynamic_lot(base_url, auth_headers, id):
         attribute_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/attributes?keys=address,latitude,longitude"
         attrs = requests.get(attribute_url, headers=auth_headers).json()
 
-        timeseries_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/timeseries?keys=latestSumParkingState,SumOccupied,TotalParking_mapping"
+        timeseries_url = f"{base_url}/plugins/telemetry/ASSET/{id}/values/timeseries?keys=latestSumParkingState,SumOccupied,TotalParking_mapping,freeShortTermSpaces"
         timeseries = requests.get(timeseries_url, headers=auth_headers).json()
         total = get_timeseries_value(timeseries, "TotalParking_mapping")
         occupied = get_timeseries_value(timeseries, "latestSumParkingState")
-        free = total - occupied
+        free = get_timeseries_value(timeseries, "freeShortTermSpaces") or total - occupied
 
         address = get_attribute(attrs, "address")
         return {
