@@ -9,6 +9,22 @@ import json
 import sys
 from argparse import ArgumentParser
 
+# the production machine has an unknown problem with ipv6
+# so therefore we need to have this ugly hack until we have found out
+# what the problem is
+
+import socket
+import requests.packages.urllib3.util.connection as urllib3_cn
+
+def allowed_gai_family():
+    """
+    https://github.com/shazow/urllib3/blob/master/urllib3/util/connection.py
+    """
+    family = socket.AF_INET # force IPv4
+    return family
+
+urllib3_cn.allowed_gai_family = allowed_gai_family
+
 CITY="herrenberg"
 
 def get_attribute(items, name):
